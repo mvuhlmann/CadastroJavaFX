@@ -1,6 +1,8 @@
 package ch.makery.address.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -104,6 +106,17 @@ public class PersonOverviewController {
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
-        personTable.getItems().remove(selectedIndex);
+        if (selectedIndex >= 0) {
+            personTable.getItems().remove(selectedIndex);
+        } else {
+            // Nada selecionado.
+
+        Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Nenhuma seleção");
+                alert.setHeaderText("Nenhuma Pessoa Selecionada");
+                alert.setContentText("Por favor, selecione uma pessoa na tabela.");
+
+                alert.showAndWait();
+        }
     }
 }
